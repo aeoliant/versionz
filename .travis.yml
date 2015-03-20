@@ -5,7 +5,7 @@ branches:
   only:
   - master
 script:
-- gulp lint
+- gulp lint && gulp publish
 deploy:
   provider: npm
   email: aeoliant@gmail.com
