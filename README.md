@@ -1,5 +1,6 @@
 # versionz
 [![Build Status](https://travis-ci.org/aeoliant/versionz.svg?branch=master)](https://travis-ci.org/aeoliant/versionz)
+
 Uses `git` to look at your previous `package.json` to determine if there was a version change
 
 ```js

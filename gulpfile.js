@@ -4,7 +4,7 @@ var gulp = require('gulp'),
 	versionz = require('./index'),
 	jshint = require('gulp-jshint');
 
-gulp.task('run', function() {
+gulp.task('publish', function() {
 	versionz(function(err, info) {
 		if (err) {
 			console.log(err);
