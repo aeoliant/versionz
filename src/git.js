@@ -23,22 +23,21 @@ module.exports = function(cb) {
       if (err) {
          cb('2' + err, null);
       } else {
-         exec('git checkout ' + sha + ' package.json && cat package.json', function(error, stdout, stderr) {
+         exec('git show ' + sha + ':package.json', function(error, stdout, stderr) {
             if (error) {
                cb('3' + error, null);
             } else {
                var oldVer = JSON.parse(stdout).version;
-               exec('git reset HEAD package.json --quiet && git checkout package.json && cat package.json', function(erro, stdou, stder) {
+               exec('git show HEAD:package.json', function(erro, stdou, stder) {
                   if (erro) {
                      cb('4' + erro, null);
                   } else {
                      var newVer = JSON.parse(stdou).version;
-                     var ret = {
+                     cb(null, {
                         then: oldVer,
                         now: newVer,
                         changed: oldVer != newVer
-                     };
-                     cb(null, ret);
+                     });
                   }
                });
             }
