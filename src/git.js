@@ -23,7 +23,6 @@ module.exports = function(cb) {
       if (err) {
          cb('2' + err, null);
       } else {
-         console.log("SHA:" + sha +"|");
          var gitCheckout = require('child_process').exec;
          gitCheckout('git checkout ' + sha + ' package.json && cat package.json', function(error, stdout, stderr) {
             if (error) {

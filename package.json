@@ -1,7 +1,8 @@
 {
   "name": "versionz",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.0.2",
+  "description": "Compares package.json versions with the previous git commit",
+  "keywords": "package.json, git",
   "main": "index.js",
   "scripts": {},
   "repository": {
