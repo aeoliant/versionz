@@ -1,3 +1,3 @@
 [submodule "versionz-test"]
 	path = versionz-test
-	url = git@github.com:aeoliant/versionz-test.git
+	url = git://github.com/aeoliant/versionz-test.git
