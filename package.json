@@ -1,0 +1,21 @@
+{
+  "name": "versionz",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/aeoliant/versionz.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/aeoliant/versionz/issues"
+  },
+  "homepage": "https://github.com/aeoliant/versionz",
+  "devDependencies": {
+    "gulp": "~3.8.11",
+    "gulp-jshint": "~1.9.4",
+    "jshint-stylish": "~1.0.1"
+  }
+}
