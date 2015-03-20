@@ -10,6 +10,7 @@ gulp.task('publish', function() {
 			console.log(err);
 		} else if (info.changed) {
 			console.log('package.json version changed from ' + info.then + ' to ' + info.now + ' last commit');
+			process.env.RELEASE_VERSIONZ = true;
 		} else {
 			console.log('package.json did not change since last commit');
 		}
