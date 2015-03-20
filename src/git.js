@@ -1,8 +1,8 @@
 'use strict';
+var exec = require('child_process').exec;
 
 var getParentCommitSha = function(cb) {
-   var gitLog = require('child_process').exec;
-   gitLog('git log --first-parent -1 --skip=1 --pretty=%H', function(error, stdout, stderr) {
+   exec('git log --first-parent -1 --skip=1 --pretty=%H', function(error, stdout, stderr) {
       if (error) {
          cb('1' + error, null);
       } else {
@@ -23,14 +23,12 @@ module.exports = function(cb) {
       if (err) {
          cb('2' + err, null);
       } else {
-         var gitCheckout = require('child_process').exec;
-         gitCheckout('git checkout ' + sha + ' package.json && cat package.json', function(error, stdout, stderr) {
+         exec('git checkout ' + sha + ' package.json && cat package.json', function(error, stdout, stderr) {
             if (error) {
                cb('3' + error, null);
             } else {
                var oldVer = JSON.parse(stdout).version;
-               var gitRevert = require('child_process').exec;
-               gitRevert('git reset HEAD package.json --quiet && git checkout package.json && cat package.json', function(erro, stdou, stder) {
+               exec('git reset HEAD package.json --quiet && git checkout package.json && cat package.json', function(erro, stdou, stder) {
                   if (erro) {
                      cb('4' + erro, null);
                   } else {
