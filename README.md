@@ -16,3 +16,19 @@ versionz(function(err, info) {
 	}
 });
 ```
+
+##cli
+
+There is a command-line interface. Run `npm install -g versionz`
+
+```bash
+$ versionz
+ERROR: package.json did not change since last commit
+$ versionz && echo true
+ERROR: package.json did not change since last commit
+$ cd versionz_test/ && versionz
+OK: package.json changed from 0.0.7 to 0.0.8
+$ versionz && echo true
+OK: package.json changed from 0.0.7 to 0.0.8
+true
+```
