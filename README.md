@@ -17,7 +17,7 @@ versionz(function(err, info) {
 });
 ```
 
-##cli
+## cli
 
 There is a command-line interface. Run `npm install -g versionz`. `versionz` runs git commands in the current directory to look at your previous `package.json` to determine if there was a version change
 
