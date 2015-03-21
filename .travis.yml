@@ -14,4 +14,4 @@ deploy:
   on:
     tags: true
     repo: aeoliant/versionz
-    condition: "$RELEASE_VERSIONZ" = "true"
+    condition: '"$RELEASE_VERSIONZ" = "true"'
