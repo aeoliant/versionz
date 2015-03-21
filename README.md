@@ -19,16 +19,21 @@ versionz(function(err, info) {
 
 ##cli
 
-There is a command-line interface. Run `npm install -g versionz`
+There is a command-line interface. Run `npm install -g versionz`. `versionz` runs git commands in the current directory to look at your previous `package.json` to determine if there was a version change
 
-```bash
-$ versionz
+<pre>
+<b>$ versionz --help</b>
+Usage:
+  versionz.js [OPTIONS] [ARGS]
+
+Options: 
+  -q, --quiet            quiet mode
+  -h, --help             Display help and usage details
+<b>$ versionz</b>
 ERROR: package.json did not change since last commit
-$ versionz && echo true
-ERROR: package.json did not change since last commit
-$ cd versionz_test/ && versionz
+<b>$ versionz -q && echo true</b>
+<b>$ cd versionz_test/ && versionz</b>
 OK: package.json changed from 0.0.7 to 0.0.8
-$ versionz && echo true
-OK: package.json changed from 0.0.7 to 0.0.8
+<b>$ versionz -q && echo true</b>
 true
-```
+</pre>
