@@ -5,7 +5,7 @@ branches:
   only:
   - master
 script:
-- gulp lint && gulp publish
+- gulp lint --silent && gulp publish --silent
 after_success:
 - ./bin/versionz.js -q && touch RELEASE
 deploy:
