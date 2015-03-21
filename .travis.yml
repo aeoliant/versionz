@@ -4,19 +4,13 @@ node_js:
 branches:
   only:
   - master
-install:
-- npm install
-- export GIT_CUR_TAG=`git tag --points-at HEAD | head -n1`
-- export RELEASE_VERSIONZ=`./bin/versionz.js`
 script:
 - gulp lint && gulp publish
-- printenv
 deploy:
   provider: npm
   email: aeoliant@gmail.com
   api_key:
     secure: nYax3/nzfN/a3+eOpk1+p6x3pgaXHVUO0hYzHw5AyHKKF7Ed28x/lbLeNB8xh3c3OgiHUWuy+ImpNs3e3wc9dwsC5oogM6GVMI/b6146yak1jgECD0pTxMqUl4Hg+GzPB/En6WoNB1IouVNMF1ORySHkGYJFiAGE0VZ5sTegqec=
   on:
-    tags: true
     repo: aeoliant/versionz
-    condition: '"$GIT_CUR_TAG" = ""'
+    condition: ./bin/versionz.js
