@@ -18,5 +18,8 @@
     "gulp": "~3.8.11",
     "gulp-jshint": "~1.9.4",
     "jshint-stylish": "~1.0.1"
+  },
+  "dependencies": {
+    "q": "~1.2.0"
   }
 }

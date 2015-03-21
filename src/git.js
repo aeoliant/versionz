@@ -1,47 +1,61 @@
 'use strict';
-var exec = require('child_process').exec;
+var exec = require('child_process').exec,
+    Q = require("q");
 
-var getParentCommitSha = function(cb) {
+var getParentCommitSha = function() {
+   var deferred = Q.defer();
    exec('git log --first-parent -1 --skip=1 --pretty=%H', function(error, stdout, stderr) {
       if (error) {
-         cb('1' + error, null);
+         deferred.reject(new Error(error));
       } else {
-         var commit_hash = stdout.trim();
-         if (commit_hash === null) {
-            cb("Could not get hash of last commit", null);
-         } else if (commit_hash.length != 40) {
-            cb("Hash of last commit is not 40 characters " + stdout, null);
+         var sha = stdout.trim();
+         if (sha === null) {
+            deferred.reject(new Error("Could not get hash of last commit"));
+         } else if (sha.length != 40) {
+            deferred.reject(new Error("Hash of last commit is not 40 characters " + stdout));
          } else {
-            cb(null, commit_hash);
+            deferred.resolve(sha);
          }
       }
    });
+   return deferred.promise;
 };
 
-module.exports = function(cb) {
-   getParentCommitSha(function(err, sha) {
-      if (err) {
-         cb('2' + err, null);
+var useItToGetOldPackageJson = function(sha) {
+   var deferred = Q.defer();
+   exec('git show ' + sha + ':package.json', function(error, stdout, stderr) {
+      if (error) {
+         deferred.reject(new Error(error));
       } else {
-         exec('git show ' + sha + ':package.json', function(error, stdout, stderr) {
-            if (error) {
-               cb('3' + error, null);
-            } else {
-               var oldVer = JSON.parse(stdout).version;
-               exec('git show HEAD:package.json', function(erro, stdou, stder) {
-                  if (erro) {
-                     cb('4' + erro, null);
-                  } else {
-                     var newVer = JSON.parse(stdou).version;
-                     cb(null, {
-                        then: oldVer,
-                        now: newVer,
-                        changed: oldVer != newVer
-                     });
-                  }
-               });
-            }
+         deferred.resolve(JSON.parse(stdout).version);
+      }
+   });
+   return deferred.promise;
+};
+
+var compareWithCurrentPackageJson = function(oldVersion) {
+   var deferred = Q.defer();
+   exec('git show HEAD:package.json', function(error, stdout, stderr) {
+      if (error) {
+         deferred.reject(new Error(error));
+      } else {
+         var newVersion = JSON.parse(stdout).version;
+         deferred.resolve({
+            then: oldVersion,
+            now: newVersion,
+            changed: oldVersion != newVersion
          });
       }
    });
+   return deferred.promise;
+};
+
+module.exports = function(cb) {
+   getParentCommitSha().then(useItToGetOldPackageJson).then(compareWithCurrentPackageJson)
+      .then(function(info) {
+         cb(null, info);
+      })
+      .fail(function(error) {
+         cb(error, null);
+      });
 };
