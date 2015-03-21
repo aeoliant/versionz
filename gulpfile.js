@@ -2,8 +2,7 @@
 
 var gulp = require('gulp'),
 	versionz = require('./index'),
-	jshint = require('gulp-jshint'),
-	exec = require('child_process').exec;
+	jshint = require('gulp-jshint');
 
 gulp.task('publish', function(cb) {
 	versionz(function(err, info) {
