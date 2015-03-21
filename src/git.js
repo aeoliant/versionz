@@ -8,10 +8,12 @@ var getParentCommitSha = function() {
       if (error) {
          deferred.reject(new Error(error));
       } else {
-         var sha = stdout.trim();
+         var sha = stdout;
          if (sha === null) {
             deferred.reject(new Error("Could not get hash of last commit"));
-         } else if (sha.length != 40) {
+         }
+         sha = sha.trim();
+         if (sha.length != 40) {
             deferred.reject(new Error("Hash of last commit is not 40 characters " + stdout));
          } else {
             deferred.resolve(sha);
