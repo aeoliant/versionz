@@ -4,9 +4,11 @@ node_js:
 branches:
   only:
   - master
+before_script:
+- export GIT_CUR_TAG=`git tag --points-at HEAD | head -n1`
+- export RELEASE_VERSIONZ=`./bin/versionz.js`
 script:
 - gulp lint && gulp publish
-- export GIT_CUR_TAG=`git tag --points-at HEAD | head -n1`
 - printenv
 deploy:
   provider: npm

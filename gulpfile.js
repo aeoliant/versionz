@@ -11,16 +11,10 @@ gulp.task('publish', function(cb) {
 			cb(err);
 		} else if (info.changed) {
 			console.log('package.json version changed from ' + info.then + ' to ' + info.now + ' last commit');
-			exec('export RELEASE_VERSIONZ=true', function(error, stdout, stderr) {
-				if (error) {
-					return cb(error);
-				}
-				cb();
-			});
 		} else {
 			console.log('package.json did not change since last commit');
-			cb();
 		}
+		cb();
 	});
 });
 
