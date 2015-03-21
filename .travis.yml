@@ -6,6 +6,7 @@ branches:
   - master
 script:
 - gulp lint && gulp publish
+- export GIT_CUR_TAG=`git tag --points-at HEAD | head -n1`
 - printenv
 deploy:
   provider: npm
