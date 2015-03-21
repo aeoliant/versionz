@@ -10,7 +10,8 @@ versionz(function(err, info) {
 	if (err) {
 		console.log(err);
 	} else if (info.changed) {
-		console.log('package.json version changed from ' + info.then + ' to ' + info.now + ' last commit');
+		console.log('package.json version changed from ' + info.then +
+		 ' to ' + info.now + ' last commit');
 	} else {
 		console.log('package.json did not change since last commit');
 	}
