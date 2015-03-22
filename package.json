@@ -2,7 +2,7 @@
   "name": "versionz",
   "version": "0.0.15",
   "description": "Compares package.json versions with the previous git commit",
-  "keywords": "package.json, git",
+  "keywords": "package.json, change, version, git, commit",
   "main": "index.js",
   "repository": {
     "type": "git",
